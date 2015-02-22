@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "dependencies": {
     "express": "^4.11.2",
+    "superagent": "^0.21.0",
     "yandex-translate": "^1.0.1"
   },
   "author": "Ian Macalinao <me@ian.pw>",
