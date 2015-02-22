@@ -2,8 +2,20 @@ var express = require('express');
 var request = require('superagent');
 var parseString = require('xml2js').parseString;
 var translate = require('yandex-translate');
+var urban = require('urban');
 
 var app = express();
+
+app.get('/urban', function(req, res) {
+  if (!req.query.word) {
+    return res.json({
+      error: 'No word found!'
+    });
+  }
+  urban(req.query.word).first(function(result) {
+    res.json(result);
+  });
+});
 
 app.get('/book', function(req, res) {
   request.get('http://api.harpercollins.com/api/v3/hcapim').query({
@@ -12,7 +24,13 @@ app.get('/book', function(req, res) {
     title: req.query.title,
     apikey: process.env.HC_KEY
   }).end(function(err, data) {
-    var isbn = data.body.Product_Group[0].Products[0].ISBN;
+    try {
+      var isbn = data.body.Product_Group[0].Products[0].ISBN;
+    } catch (x) {
+      return res.json({
+        error: 'yolo'
+      });
+    }
     request.get('http://api.harpercollins.com/api/v3/hcapim').query({
       apiname: 'ProductInfo',
       format: 'XML',
