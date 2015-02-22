@@ -3,15 +3,15 @@
   "description": "Cyanogen inline translation with context menus",
   "version": "0.0.0",
   "dependencies": {
-    "bing-translate": "0.0.2",
-    "express": "^4.11.2"
+    "express": "^4.11.2",
+    "translate": "^0.7.0",
+    "yandex-translate": "^1.0.1"
   },
   "author": "Ian Macalinao <me@ian.pw>",
   "repository": "simplyianm/cyantranslate",
   "license": "MIT",
   "keywords": [
-    "cyantranslate",
-    ""
+    "cyantranslate"
   ],
   "scripts": {
     "start": "node server",
