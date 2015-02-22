@@ -2,7 +2,10 @@
   "name": "cyantranslate",
   "description": "Cyanogen inline translation with context menus",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bing-translate": "0.0.2",
+    "express": "^4.11.2"
+  },
   "author": "Ian Macalinao <me@ian.pw>",
   "repository": "simplyianm/cyantranslate",
   "license": "MIT",
