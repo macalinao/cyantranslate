@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('superagent');
+var parseString = require('xml2js').parseString;
 var translate = require('yandex-translate');
 
 var app = express();
@@ -11,7 +12,19 @@ app.get('/book', function(req, res) {
     title: req.query.title,
     apikey: process.env.HC_KEY
   }).end(function(err, data) {
-    res.json(data.body);
+    var isbn = data.body.Product_Group[0].Products[0].ISBN;
+    request.get('http://api.harpercollins.com/api/v3/hcapim').query({
+      apiname: 'ProductInfo',
+      format: 'XML',
+      isbn: isbn,
+      apikey: process.env.HC_KEY
+    }).end(function(e, d2) {
+      parseString(d2.text, {
+        explicitArray: false
+      }, function(e2, rs) {
+        res.json(rs.OpenBook_API.Product_Detail);
+      });
+    });
   });
 });
 
