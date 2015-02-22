@@ -1,0 +1,20 @@
+{
+  "name": "cyantranslate",
+  "description": "Cyanogen inline translation with context menus",
+  "version": "0.0.0",
+  "dependencies": {},
+  "author": "Ian Macalinao <me@ian.pw>",
+  "repository": "simplyianm/cyantranslate",
+  "license": "MIT",
+  "keywords": [
+    "cyantranslate",
+    ""
+  ],
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R spec"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
+  }
+}
