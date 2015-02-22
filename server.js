@@ -4,13 +4,17 @@ var translate = require('yandex-translate');
 var app = express();
 
 app.get('/translate', function(req, res) {
-  translate(req.query.text, {
-    from: req.query.from || 'es',
-    to: req.query.to || 'en',
+  translate.detect(req.query.text, {
     key: process.env.YANDEX_KEY
-  }, function(err, t) {
-    res.json({
-      result: (t.text || [])[0]
+  }, function(err, r) {
+    translate(req.query.text, {
+      from: req.query.from || r.lang || 'es',
+      to: req.query.to || 'en',
+      key: process.env.YANDEX_KEY
+    }, function(err, t) {
+      res.json({
+        result: (t.text || [])[0]
+      });
     });
   });
 });
